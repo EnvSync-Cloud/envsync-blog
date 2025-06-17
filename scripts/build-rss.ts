@@ -76,7 +76,7 @@ function createRSS(blogPosts = []) {
 
 async function main() {
 	await loadEnvConfig(process.cwd());
-	serverConstants.NOTION_TOKEN = process.env.NOTION_TOKEN;
+	serverConstants.NOTION_INTERNAL_TOKEN = process.env.NOTION_INTERNAL_TOKEN;
 	serverConstants.BLOG_INDEX_ID = serverConstants.normalizeId(process.env.BLOG_INDEX_ID);
 
 	const postsTable = await getBlogIndex(true);

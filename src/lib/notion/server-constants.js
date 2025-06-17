@@ -15,13 +15,13 @@ const normalizeId = id => {
 	)}-${id.substr(20)}`;
 };
 
-const NOTION_TOKEN = process.env.NOTION_TOKEN;
+const NOTION_INTERNAL_TOKEN = process.env.NOTION_INTERNAL_TOKEN;
 const BLOG_INDEX_ID = normalizeId(process.env.BLOG_INDEX_ID);
 const API_ENDPOINT = "https://www.notion.so/api/v3";
 const BLOG_INDEX_CACHE = path.resolve(".blog_index_data");
 
 module.exports = {
-	NOTION_TOKEN,
+	NOTION_INTERNAL_TOKEN,
 	BLOG_INDEX_ID,
 	API_ENDPOINT,
 	BLOG_INDEX_CACHE,

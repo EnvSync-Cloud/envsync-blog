@@ -1,7 +1,7 @@
 // commonjs so it can be run without transpiling
 const { v4: uuid } = require("uuid");
 const fetch = require("node-fetch");
-const { BLOG_INDEX_ID: pageId, NOTION_TOKEN, API_ENDPOINT } = require("./server-constants");
+const { BLOG_INDEX_ID: pageId, NOTION_INTERNAL_TOKEN, API_ENDPOINT } = require("./server-constants");
 
 async function main() {
 	const userId = await getUserId();
@@ -309,7 +309,7 @@ async function main() {
 	const res = await fetch(`${API_ENDPOINT}/submitTransaction`, {
 		method: "POST",
 		headers: {
-			cookie: `token_v2=${NOTION_TOKEN}`,
+			cookie: `token_v2=${NOTION_INTERNAL_TOKEN}`,
 			"content-type": "application/json",
 		},
 		body: JSON.stringify(requestBody),
@@ -324,7 +324,7 @@ async function getExistingexistingBlockId() {
 	const res = await fetch(`${API_ENDPOINT}/loadPageChunk`, {
 		method: "POST",
 		headers: {
-			cookie: `token_v2=${NOTION_TOKEN}`,
+			cookie: `token_v2=${NOTION_INTERNAL_TOKEN}`,
 			"content-type": "application/json",
 		},
 		body: JSON.stringify({
@@ -348,7 +348,7 @@ async function getUserId() {
 	const res = await fetch(`${API_ENDPOINT}/loadUserContent`, {
 		method: "POST",
 		headers: {
-			cookie: `token_v2=${NOTION_TOKEN}`,
+			cookie: `token_v2=${NOTION_INTERNAL_TOKEN}`,
 			"content-type": "application/json",
 		},
 		body: "{}",
