@@ -16,9 +16,9 @@ const Header = ({ titlePre = "" }) => {
 	const { pathname } = useRouter();
 
 	return (
-        <header className={styles.header}>
-            <Head>
-				<title>{[titlePre, 'EnvSync Blog'].filter(Boolean).join(' | ')}</title>
+		<header className={styles.header}>
+			<Head>
+				<title>{[titlePre, "EnvSync Blog"].filter(Boolean).join(" | ")}</title>
 				<meta name="description" content="Official EnvSync blogs" />
 				<meta name="og:title" content="EnvSync Blogs" />
 				<meta property="og:image" content={ogImageUrl} />
@@ -26,7 +26,7 @@ const Header = ({ titlePre = "" }) => {
 				<meta name="twitter:card" content="summary_large_image" />
 				<meta name="twitter:image" content={ogImageUrl} />
 			</Head>
-            <ul>
+			<ul>
 				{navItems.map(({ label, page, link }) => (
 					<li key={label}>
 						{page ? (
@@ -39,8 +39,8 @@ const Header = ({ titlePre = "" }) => {
 					</li>
 				))}
 			</ul>
-        </header>
-    );
+		</header>
+	);
 };
 
 export default Header;

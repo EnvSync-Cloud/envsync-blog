@@ -133,9 +133,9 @@ const RenderPost = ({ post, redirect, preview }) => {
 	}
 
 	return (
-        <>
-            <Header titlePre={post.Page} />
-            {preview && (
+		<>
+			<Header titlePre={post.Page} />
+			{preview && (
 				<div className={blogStyles.previewAlertContainer}>
 					<div className={blogStyles.previewAlert}>
 						<b>Note:</b>
@@ -146,31 +146,38 @@ const RenderPost = ({ post, redirect, preview }) => {
 					</div>
 				</div>
 			)}
-            <div className={blogStyles.post}>
+			<div className={blogStyles.post}>
 				<h1>{post.Page || ""}</h1>
-        {post.Authors.length > 0 && (
-          <div className={blogStyles.authors}>
-            <span className={blogStyles.byText}>By:</span>
-            <div className={blogStyles.authorsContainer}>
-              {post.Authors.map((author, idx) => {
-                return (
-                  <span key={`${post.Slug}-author-${author.id}-${idx}`} className={blogStyles.authorItem}>
-                    <img 
-                      src={author.profile_photo} 
-                      alt={author.full_name} 
-                      className={blogStyles.authorPhoto} 
-                    />
-                    <span className={blogStyles.authorName}>{author.full_name}</span>
-                    {idx < post.Authors.length - 1 && (
-                      <span key={`${post.Slug}-separator-${idx}`} className={blogStyles.authorSeparator}>, </span>
-                    )}
-                  </span>
-                )
-              })}
-            </div>
-          </div>
-        )}
-
+				{post.Authors.length > 0 && (
+					<div className={blogStyles.authors}>
+						<span className={blogStyles.byText}>By:</span>
+						<div className={blogStyles.authorsContainer}>
+							{post.Authors.map((author, idx) => {
+								return (
+									<span
+										key={`${post.Slug}-author-${author.id}-${idx}`}
+										className={blogStyles.authorItem}
+									>
+										<img
+											src={author.profile_photo}
+											alt={author.full_name}
+											className={blogStyles.authorPhoto}
+										/>
+										<span className={blogStyles.authorName}>{author.full_name}</span>
+										{idx < post.Authors.length - 1 && (
+											<span
+												key={`${post.Slug}-separator-${idx}`}
+												className={blogStyles.authorSeparator}
+											>
+												,{" "}
+											</span>
+										)}
+									</span>
+								);
+							})}
+						</div>
+					</div>
+				)}
 
 				{post.Date && <div className="posted">Posted: {getDateStr(post.Date)}</div>}
 
@@ -231,7 +238,9 @@ const RenderPost = ({ post, redirect, preview }) => {
 						listTagName = null;
 					}
 
-					const renderHeading = (Type: string | React.ComponentType<{ children?: React.ReactNode }>) => {
+					const renderHeading = (
+						Type: string | React.ComponentType<{ children?: React.ReactNode }>,
+					) => {
 						toRender.push(
 							<Heading key={id}>
 								<Type key={id}>{textBlock(properties.title, true, id)}</Type>
@@ -450,8 +459,8 @@ const RenderPost = ({ post, redirect, preview }) => {
 					return toRender;
 				})}
 			</div>
-        </>
-    );
+		</>
+	);
 };
 
 export default RenderPost;

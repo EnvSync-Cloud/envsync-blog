@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 import { resolve } from "path";
 import { writeFile } from "../src/lib/fs-helpers";

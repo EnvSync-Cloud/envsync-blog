@@ -45,9 +45,9 @@ module.exports = {
 
 		if (!isServer) {
 			config.node = {
-				fs: 'empty',
-				os: 'empty',
-				path: 'empty'
+				fs: "empty",
+				os: "empty",
+				path: "empty",
 			};
 		}
 

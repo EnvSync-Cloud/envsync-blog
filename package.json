@@ -1,43 +1,43 @@
 {
-  "name": "notion-blog",
-  "version": "0.1.0",
-  "scripts": {
-    "build": "next build && bun run scripts/build-rss.ts",
-    "dev": "next dev",
-    "format": "prettier --write \"**/*.{js,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss,sass}\" --ignore-path .gitignore",
-    "lint-staged": "lint-staged",
-    "start": "next start"
-  },
-  "dependencies": {
-    "@zeit/react-jsx-parser": "2.0.0",
-    "async-sema": "3.1.0",
-    "github-slugger": "1.2.1",
-    "katex": "0.12.0",
-    "next": "14.2.30",
-    "node-fetch": "v2",
-    "prismjs": "1.17.1",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "uuid": "8.1.0"
-  },
-  "devDependencies": {
-    "@bravo68web/prettier-config": "^1.2.6",
-    "@types/katex": "0.11.0",
-    "@types/node": "14.14.31",
-    "@types/react": "18.3.23",
-    "lint-staged": "10.5.4",
-    "pre-commit": "1.2.2",
-    "prettier": "3",
-    "typescript": "^4.4.4"
-  },
-  "pre-commit": "lint-staged",
-  "prettier": "@bravo68web/prettier-config",
-  "overrides": {
-    "@types/react": "18.3.23"
-  },
-  "browser": {
-    "fs": false,
-    "os": false,
-    "path": false
-  }
+	"name": "notion-blog",
+	"version": "0.1.0",
+	"browser": {
+		"fs": false,
+		"os": false,
+		"path": false
+	},
+	"scripts": {
+		"build": "next build && bun run scripts/build-rss.ts",
+		"dev": "next dev",
+		"format": "prettier --write \"**/*.{js,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss,sass}\" --ignore-path .gitignore",
+		"lint-staged": "lint-staged",
+		"start": "next start"
+	},
+	"dependencies": {
+		"@zeit/react-jsx-parser": "2.0.0",
+		"async-sema": "3.1.0",
+		"github-slugger": "1.2.1",
+		"katex": "0.12.0",
+		"next": "14.2.30",
+		"node-fetch": "v2",
+		"prismjs": "1.17.1",
+		"react": "18.3.1",
+		"react-dom": "18.3.1",
+		"uuid": "8.1.0"
+	},
+	"devDependencies": {
+		"@bravo68web/prettier-config": "^1.2.6",
+		"@types/katex": "0.11.0",
+		"@types/node": "14.14.31",
+		"@types/react": "18.3.23",
+		"lint-staged": "10.5.4",
+		"pre-commit": "1.2.2",
+		"prettier": "3",
+		"typescript": "^4.4.4"
+	},
+	"overrides": {
+		"@types/react": "18.3.23"
+	},
+	"pre-commit": "lint-staged",
+	"prettier": "@bravo68web/prettier-config"
 }

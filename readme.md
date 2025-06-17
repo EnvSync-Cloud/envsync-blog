@@ -5,6 +5,7 @@
 ## 🛠️ Tech Stack
 
 This blog is built with:
+
 - **Next.js** - React framework for production
 - **Notion API** - Content management via Notion
 - **TypeScript** - Type-safe development
@@ -16,4 +17,4 @@ This blog is based on the excellent [notion-blog](https://github.com/ijjk/notion
 
 ---
 
-*Making environment configuration simple, secure, and synchronized* 🌟
+_Making environment configuration simple, secure, and synchronized_ 🌟
