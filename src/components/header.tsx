@@ -16,8 +16,8 @@ const Header = ({ titlePre = "" }) => {
 	const { pathname } = useRouter();
 
 	return (
-		<header className={styles.header}>
-			<Head>
+        <header className={styles.header}>
+            <Head>
 				<title>{titlePre ? `${titlePre} |` : ""} EnvSync Blogs</title>
 				<meta name="description" content="Official EnvSync blogs" />
 				<meta name="og:title" content="EnvSync Blogs" />
@@ -26,12 +26,12 @@ const Header = ({ titlePre = "" }) => {
 				<meta name="twitter:card" content="summary_large_image" />
 				<meta name="twitter:image" content={ogImageUrl} />
 			</Head>
-			<ul>
+            <ul>
 				{navItems.map(({ label, page, link }) => (
 					<li key={label}>
 						{page ? (
-							<Link href={page}>
-								<a className={pathname === page ? "active" : undefined}>{label}</a>
+							<Link href={page} className={pathname === page ? "active" : undefined}>
+								{label}
 							</Link>
 						) : (
 							<ExtLink href={link}>{label}</ExtLink>
@@ -39,8 +39,8 @@ const Header = ({ titlePre = "" }) => {
 					</li>
 				))}
 			</ul>
-		</header>
-	);
+        </header>
+    );
 };
 
 export default Header;

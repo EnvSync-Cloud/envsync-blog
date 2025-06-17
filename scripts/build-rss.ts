@@ -1,13 +1,15 @@
+"use server"
+
 import { resolve } from "path";
-import { writeFile } from "./fs-helpers";
+import { writeFile } from "../src/lib/fs-helpers";
 import { renderToStaticMarkup } from "react-dom/server";
 
-import { textBlock } from "./notion/renderers";
-import getBlogIndex from "./notion/getBlogIndex";
-import getNotionUsers from "./notion/getNotionUsers";
-import { postIsPublished, getBlogLink } from "./blog-helpers";
+import { textBlock } from "../src/lib/notion/renderers";
+import getBlogIndex from "../src/lib/notion/getBlogIndex";
+import getNotionUsers from "../src/lib/notion/getNotionUsers";
+import { postIsPublished, getBlogLink } from "../src/lib/blog-helpers";
 import { loadEnvConfig } from "@next/env";
-import serverConstants from "./notion/server-constants";
+import serverConstants from "../src/lib/notion/server-constants";
 
 // must use weird syntax to bypass auto replacing of NODE_ENV
 process.env["NODE" + "_ENV"] = "production";

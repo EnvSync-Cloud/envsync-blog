@@ -133,20 +133,20 @@ const RenderPost = ({ post, redirect, preview }) => {
 	}
 
 	return (
-		<>
-			<Header titlePre={post.Page} />
-			{preview && (
+        <>
+            <Header titlePre={post.Page} />
+            {preview && (
 				<div className={blogStyles.previewAlertContainer}>
 					<div className={blogStyles.previewAlert}>
 						<b>Note:</b>
 						{` `}Viewing in preview mode{" "}
-						<Link href={`/api/clear-preview?slug=${post.Slug}`}>
+						<Link href={`/api/clear-preview?slug=${post.Slug}`} legacyBehavior>
 							<button className={blogStyles.escapePreview}>Exit Preview</button>
 						</Link>
 					</div>
 				</div>
 			)}
-			<div className={blogStyles.post}>
+            <div className={blogStyles.post}>
 				<h1>{post.Page || ""}</h1>
 				{post.Authors.length > 0 && (
 					<div className={blogStyles.authors}>
@@ -191,7 +191,7 @@ const RenderPost = ({ post, redirect, preview }) => {
 						listMap[id] = {
 							key: id,
 							nested: [],
-							children: textBlock(properties.title, true, id),
+							children: [textBlock(properties.title, true, id)],
 						};
 
 						if (listMap[parent_id]) {
@@ -230,7 +230,7 @@ const RenderPost = ({ post, redirect, preview }) => {
 						listTagName = null;
 					}
 
-					const renderHeading = (Type: string | React.ComponentType) => {
+					const renderHeading = (Type: string | React.ComponentType<{ children?: React.ReactNode }>) => {
 						toRender.push(
 							<Heading key={id}>
 								<Type key={id}>{textBlock(properties.title, true, id)}</Type>
@@ -449,8 +449,8 @@ const RenderPost = ({ post, redirect, preview }) => {
 					return toRender;
 				})}
 			</div>
-		</>
-	);
+        </>
+    );
 };
 
 export default RenderPost;
