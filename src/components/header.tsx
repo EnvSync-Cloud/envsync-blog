@@ -18,7 +18,7 @@ const Header = ({ titlePre = "" }) => {
 	return (
         <header className={styles.header}>
             <Head>
-				<title>{titlePre ? `${titlePre} |` : ""} EnvSync Blogs</title>
+				<title>{[titlePre, 'EnvSync Blog'].filter(Boolean).join(' | ')}</title>
 				<meta name="description" content="Official EnvSync blogs" />
 				<meta name="og:title" content="EnvSync Blogs" />
 				<meta property="og:image" content={ogImageUrl} />

@@ -10,103 +10,104 @@ import getNotionUsers from "../lib/notion/getNotionUsers";
 import getBlogIndex from "../lib/notion/getBlogIndex";
 
 export async function getStaticProps({ preview }) {
-	const postsTable = await getBlogIndex();
+  const postsTable = await getBlogIndex();
 
-	const authorsToGet: Set<string> = new Set();
-	const posts: any[] = Object.keys(postsTable)
-		.map(slug => {
-			const post = postsTable[slug];
-			// remove draft posts in production
-			if (!preview && !postIsPublished(post)) {
-				return null;
-			}
-			post.Authors = post.Authors || [];
-			for (const author of post.Authors) {
-				authorsToGet.add(author);
-			}
-			return post;
-		})
-		.filter(Boolean);
+  const authorsToGet: Set<string> = new Set();
+  const posts: any[] = Object.keys(postsTable)
+    .map(slug => {
+      const post = postsTable[slug];
+      // remove draft posts in production
+      if (!preview && !postIsPublished(post)) {
+        return null;
+      }
+      post.Authors = post.Authors || [];
+      for (const author of post.Authors) {
+        authorsToGet.add(author);
+      }
+      return post;
+    })
+    .filter(Boolean);
 
-	const { users } = await getNotionUsers([...authorsToGet]);
+  const { users } = await getNotionUsers([...authorsToGet]);
 
-	posts.map(post => {
-		post.Authors = post.Authors.map(id => users[id]);
-	});
+  posts.map(post => {
+    post.Authors = post.Authors.map(id => users[id]);
+  });
 
-	return {
-		props: {
-			preview: preview || false,
-			posts,
-		},
-		revalidate: 10,
-	};
+  return {
+    props: {
+      preview: preview || false,
+      posts,
+    },
+    revalidate: 10,
+  };
 }
 
 const Index = ({ posts = [], preview }) => {
-	return (
-        <>
-            <Header titlePre="Blog" />
-            {preview && (
-				<div className={blogStyles.previewAlertContainer}>
-					<div className={blogStyles.previewAlert}>
-						<b>Note:</b>
-						{` `}Viewing in preview mode{" "}
-						<Link href={`/api/clear-preview`} legacyBehavior>
-							<button className={blogStyles.escapePreview}>Exit Preview</button>
-						</Link>
-					</div>
-				</div>
-			)}
-            <div className={`${sharedStyles.layout} ${blogStyles.blogIndex}`}>
-				<h1>EnvSync Blogs</h1>
-				{posts.length === 0 && <p className={blogStyles.noPosts}>There are no posts yet</p>}
-				{posts.map(post => {
-					return (
-                        <div className={blogStyles.postPreview} key={post.Slug}>
-                            <h3>
-								<span className={blogStyles.titleContainer}>
-									{!post.Published && <span className={blogStyles.draftBadge}>Draft</span>}
-									<Link href="/blog/[slug]" as={getBlogLink(post.Slug)}>
-										{post.Page}
-									</Link>
-								</span>
-							</h3>
-                            {post.Authors.length > 0 && (
-								<div className={blogStyles.authors}>
-									<span className={blogStyles.byText}>By:</span>
-									<div className={blogStyles.authorsContainer}>
-										{post.Authors.map((author, idx) => {
-											return (
-												<span key={author.id} className={blogStyles.authorItem}>
-													<img
-														src={author.profile_photo}
-														alt={author.full_name}
-														className={blogStyles.authorPhoto}
-													/>
-													<span className={blogStyles.authorName}>{author.full_name}</span>
-													{idx < post.Authors.length - 1 && (
-														<span className={blogStyles.authorSeparator}>, </span>
-													)}
-												</span>
-											);
-										})}
-									</div>
-								</div>
-							)}
-                            {post.Date && <div className="posted">Posted: {getDateStr(post.Date)}</div>}
-                            <p>
-								{(!post.preview || post.preview.length === 0) && "No preview available"}
-								{(post.preview || []).map((block, idx) =>
-									textBlock(block, true, `${post.Slug}${idx}`),
-								)}
-							</p>
-                        </div>
-                    );
-				})}
-			</div>
-        </>
-    );
+  return (
+    <>
+      <Header titlePre="Blog" />
+      {preview && (
+        <div className={blogStyles.previewAlertContainer}>
+          <div className={blogStyles.previewAlert}>
+            <b>Note:</b>
+            {` `}Viewing in preview mode{" "}
+            <Link href={`/api/clear-preview`} legacyBehavior>
+              <button className={blogStyles.escapePreview}>Exit Preview</button>
+            </Link>
+          </div>
+        </div>
+      )}
+      <div className={`${sharedStyles.layout} ${blogStyles.blogIndex}`}>
+        <h1>EnvSync Blogs</h1>
+        {posts.length === 0 && <p className={blogStyles.noPosts}>There are no posts yet</p>}
+        {posts.map(post => {
+          return (
+            <div className={blogStyles.postPreview} key={post.Slug}>
+              <h3>
+                <span className={blogStyles.titleContainer}>
+                  {!post.Published && <span className={blogStyles.draftBadge}>Draft</span>}
+                  <Link href="/blog/[slug]" as={getBlogLink(post.Slug)}>
+                    {post.Page}
+                  </Link>
+                </span>
+              </h3>
+              {post.Authors.length > 0 && (
+                <div className={blogStyles.authors}>
+                  <span className={blogStyles.byText}>By:</span>
+                  <div className={blogStyles.authorsContainer}>
+                    {post.Authors.map((author, idx) => {
+                      return (
+                        <span key={`${post.Slug}-author-${author.id}-${idx}`} className={blogStyles.authorItem}>
+                          <img 
+                            src={author.profile_photo} 
+                            alt={author.full_name} 
+                            className={blogStyles.authorPhoto} 
+                          />
+                          <span className={blogStyles.authorName}>{author.full_name}</span>
+                          {idx < post.Authors.length - 1 && (
+                            <span key={`${post.Slug}-separator-${idx}`} className={blogStyles.authorSeparator}>, </span>
+                          )}
+                        </span>
+                      )
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {post.Date && <div className="posted">Posted: {getDateStr(post.Date)}</div>}
+              <p>
+                {(!post.preview || post.preview.length === 0) && "No preview available"}
+                {(post.preview || []).map((block, idx) =>
+                  textBlock(block, true, `${post.Slug}${idx}`),
+                )}
+              </p>
+            </div>
+          );
+        })}
+      </div>
+    </>
+  );
 };
 
 export default Index;
