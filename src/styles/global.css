@@ -338,8 +338,8 @@ pre :global(code) {
 
 code {
 	font-size: 0.8rem;
-	background: var(--accents-8);
-	color: var(--accents-1);
+	background: var(--accents-8) !important;
+	color: var(--fg); /* Changed from var(--accents-1) to var(--fg) */
 	padding: 0.2rem;
 	border-radius: var(--radius);
 	font-family: var(--font-mono);

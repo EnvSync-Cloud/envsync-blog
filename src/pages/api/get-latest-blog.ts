@@ -4,8 +4,6 @@ import getBlogIndex from "../../lib/notion/getBlogIndex";
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const postsTable = await getBlogIndex();
 
-	console.log("get-latest-blog", postsTable);
-
 	if (!postsTable) {
 		return res.status(401).json({ message: "Failed to fetch posts" });
 	}
